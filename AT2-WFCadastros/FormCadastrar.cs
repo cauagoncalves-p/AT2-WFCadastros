@@ -23,7 +23,7 @@ namespace AT2_WFCadastros
             MessageBox.Show(mensage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void LimparTela() 
+        private void LimparTela()
         {
             txtNome.Clear();
             txtDescricao.Clear();
@@ -36,11 +36,19 @@ namespace AT2_WFCadastros
             MessageBox.Show(mensage, "Cadastrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+
+        private void FormCadastrar_Load(object sender, EventArgs e)
+        {
+            int qtdeProdutos = UsuarioCadastro.ListaCadastro.Count;
+            int novoCodigo = qtdeProdutos + 1;
+            mkdCodigo.Text = novoCodigo.ToString("D4");
+        }
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             UsuarioCadastro cadastro = new UsuarioCadastro();
 
-            if (string.IsNullOrEmpty(txtNome.Text)) 
+            if (string.IsNullOrEmpty(txtNome.Text))
             {
                 Error("Preencha todos os campos");
                 return;
@@ -59,7 +67,7 @@ namespace AT2_WFCadastros
             }
 
             cadastro.NomeCategoria = txtNome.Text;
-            cadastro.Descricao = txtDescricao.Text; 
+            cadastro.Descricao = txtDescricao.Text;
             cadastro.DataCadastro = dtpDataCadastro.Value;
 
             if (rdbAtivo.Checked)
@@ -69,7 +77,7 @@ namespace AT2_WFCadastros
             else
             {
                 cadastro.Status = false;
-            }   
+            }
 
             cadastro.Codigo = UsuarioCadastro.ListaCadastro.Count + 1;
             mkdCodigo.Text = cadastro.Codigo.ToString();
@@ -79,7 +87,11 @@ namespace AT2_WFCadastros
             Cadastrado("Cadastrado com sucesso!");
 
             LimparTela();
+            int qtdeProdutos = UsuarioCadastro.ListaCadastro.Count;
+            int novoCodigo = qtdeProdutos + 1;
+            mkdCodigo.Text = novoCodigo.ToString("D4");
 
         }
+
     }
 }

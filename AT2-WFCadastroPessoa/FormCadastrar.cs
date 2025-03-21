@@ -28,6 +28,8 @@ namespace AT2_WFCadastroPessoa
             txtNome.Clear();
             mkdCelular.Clear();
             mkdCodigo.Clear();
+            mkdCPF.Clear();
+            cbkPossuiFilhos.Checked = false;
             txtEmail.Clear();
             rdbComercial.Checked = false;
             rdbPessoal.Checked = false;
@@ -37,6 +39,12 @@ namespace AT2_WFCadastroPessoa
         private void Cadastrado(string mensage)
         {
             MessageBox.Show(mensage, "Cadastrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void FormCadastrar_Load(object sender, EventArgs e)
+        {
+            int qtdeProdutos = Pessoa.ListaCadastro.Count;
+            int novoCodigo = qtdeProdutos + 1;
+            mkdCodigo.Text = novoCodigo.ToString("D4");
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -71,11 +79,13 @@ namespace AT2_WFCadastroPessoa
                 return;
             }
 
-            if (!cbkPossuiFilhos.Checked)
+            if (cbkPossuiFilhos.CheckState == CheckState.Indeterminate)
             {
-                MessageBox.Show("Preencha todos os campos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Preencha todos os campos corretamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            bool possuiFilhos = cbkPossuiFilhos.Checked;
+
 
             Pessoa pessoa = new Pessoa();
 
@@ -110,6 +120,9 @@ namespace AT2_WFCadastroPessoa
             Cadastrado("Cadastro realizado com sucesso!");
             Pessoa.ListaCadastro.Add(pessoa);
             LimparTela();
+            int qtdeProdutos = Usuario.ListaCadastro.Count;
+            int novoCodigo = qtdeProdutos + 1;
+            mkdCodigo.Text = novoCodigo.ToString("D4");
 
         }
 
@@ -117,5 +130,7 @@ namespace AT2_WFCadastroPessoa
         {
             this.Close();
         }
+
+     
     }
 }

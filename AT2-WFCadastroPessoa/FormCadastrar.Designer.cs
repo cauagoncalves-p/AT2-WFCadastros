@@ -60,6 +60,7 @@
             // 
             // mkdCodigo
             // 
+            mkdCodigo.Enabled = false;
             mkdCodigo.Location = new Point(77, 33);
             mkdCodigo.Mask = "0000";
             mkdCodigo.Name = "mkdCodigo";
@@ -244,6 +245,7 @@
             Name = "FormCadastrar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario de cadastro";
+            Load += FormCadastrar_Load;
             gpxTipoTelefone.ResumeLayout(false);
             gpxTipoTelefone.PerformLayout();
             ResumeLayout(false);
